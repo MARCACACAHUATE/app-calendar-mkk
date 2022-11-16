@@ -1,6 +1,6 @@
 {
-  "name": "vite-electron-builder",
-  "description": "Secure boilerplate for Electron app based on Vite",
+  "name": "app-calendar-mkk",
+  "description": "calendario medio piteron como proyecto para Admin de DBs",
   "version": "1.0.1",
   "private": true,
   "author": {
@@ -41,9 +41,7 @@
     "eslint": "^8.27.0",
     "eslint-config-prettier": "^8.5.0",
     "happy-dom": "7.7.0",
-    "nano-staged": "0.8.0",
     "playwright": "1.27.1",
-    "simple-git-hooks": "2.8.1",
     "typescript": "4.8.4",
     "unplugin-auto-expose": "0.0.4",
     "vite": "3.2.3",
