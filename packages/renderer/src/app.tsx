@@ -1,12 +1,11 @@
 import React from "react";
-
+import { CalendarContainer } from './components/CalendarComponents/CalendarContainer';
 
 function App(){
 
     return (
         <div>
-            <p>Texto de super prueba</p>
-            <p>cena la cocena en la ofecena</p>
+            <CalendarContainer />
         </div>
     );
 }
