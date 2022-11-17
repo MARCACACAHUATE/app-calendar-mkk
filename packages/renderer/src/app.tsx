@@ -1,11 +1,14 @@
 import React from "react";
 import { CalendarContainer } from './components/CalendarComponents/CalendarContainer';
+import { CalendarProvider } from './context/CalendarContext';
 
 function App(){
 
     return (
         <div>
-            <CalendarContainer />
+            <CalendarProvider>
+                <CalendarContainer />
+            </CalendarProvider>
         </div>
     );
 }
