@@ -2,10 +2,14 @@ import React, { useContext, useState } from "react";
 //import { BotonNavegacion } from './BotonNavegacion';
 import { CalendarContext } from '../../context/CalendarContext';
 
+interface Props {
+    setMonthIndex: any,
+    monthIndex: number
+    }
 
-function MonthNav(){
+function MonthNav({setMonthIndex, monthIndex}: Props){
 
-    const [monthIndex, setMonthIndex] = useState<number>(0);
+    //const [monthIndex, setMonthIndex] = useState<number>(0);
 
 
     const onNextMonthHandler = () =>{
@@ -40,7 +44,7 @@ function MonthNav(){
     return (
         <div className="box-border w-full h-7 bg-gray-400 flex justify-between">
             <button  onClick={onPreviousMonthHandler}> - </button>
-            <span>{ monthsName[monthIndex].month_name }</span>
+            <span>{ monthsName[monthIndex].month_name }, {monthsName[0].year}</span>
             <button  onClick={onNextMonthHandler}> + </button>
         </div>
     );

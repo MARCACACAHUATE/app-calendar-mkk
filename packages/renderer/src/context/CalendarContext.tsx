@@ -6,7 +6,7 @@ const CalendarContext = createContext<CalendarInfo | null>(null);
 
 function CalendarProvider(props){
 
-    const {calendar, week_days_name} = CreateCalendar();
+    const {calendar, week_days_name} = CreateCalendar(2022, 'es');
 
     return(
         <CalendarContext.Provider value={{
