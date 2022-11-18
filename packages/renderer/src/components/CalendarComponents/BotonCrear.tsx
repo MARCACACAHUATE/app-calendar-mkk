@@ -2,7 +2,9 @@ import React from "react";
 
 function BotonCrear(){
     return (
-        <button>+</button>
+        <div className="grid justify-items-end">
+            <button className="">+</button>
+        </div> 
     );
 }
 

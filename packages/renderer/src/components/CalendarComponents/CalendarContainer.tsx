@@ -4,7 +4,10 @@ import { CellContainer } from './CellContainer';
 import { DaysContainer } from './DaysContainer';
 
 function CalendarContainer(){
-    const [monthIndex, setMonthIndex] = useState<number>(0);
+    console.log(new Date().getMonth());
+
+    const [monthIndex, setMonthIndex] = useState<number>(new Date().getMonth());
+
     
     return (
        <div className="grid justify-items-center border-2 border-gray-400 rounded-md w-11/12 m-4">

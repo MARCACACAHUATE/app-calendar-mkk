@@ -8,4 +8,6 @@ export interface DateCalendarInfo {
 export interface CalendarInfo {
     calendar: Array<DateCalendarInfo>
     week_days_name: Array<string>
+    actualDay: number
+    actualMonth: number
 }

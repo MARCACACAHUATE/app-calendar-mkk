@@ -8,10 +8,16 @@ function CalendarProvider(props){
 
     const {calendar, week_days_name} = CreateCalendar(2022, 'es');
 
+    const actualDay = new Date().getDate();
+    const actualMonth = new Date().getMonth();
+
+
     return(
         <CalendarContext.Provider value={{
                 calendar,
-                week_days_name
+                week_days_name,
+                actualDay,
+                actualMonth
             }}>
             {props.children}
         </CalendarContext.Provider>
