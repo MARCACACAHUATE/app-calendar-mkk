@@ -5,7 +5,11 @@ module.exports = {
     "./packages/renderer/src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+        spacing: {
+            '128': '32rem',
+        }
+    },
     fontFamily: {
         'nerd': [''],
     }
