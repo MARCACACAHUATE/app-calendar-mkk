@@ -15,10 +15,6 @@ function CellContainer({monthIndex}: Props){
         return [...Array(daysOfMonth).keys()];
     });
 
-
-    console.log(calendarInfo?.actualMonth);
-    console.log(monthIndex)
-
     return (
         <div className="grid grid-cols-7 gap-1 justify-items-center p2 w-full">
 

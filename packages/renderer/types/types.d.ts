@@ -9,5 +9,11 @@ export interface CalendarInfo {
     calendar: Array<DateCalendarInfo>
     week_days_name: Array<string>
     actualDay: number
-    actualMonth: number
+    actualMonth: number,
+}
+
+
+export interface ModalInfo {
+    isOpen: boolean,
+    setIsOpen: any
 }

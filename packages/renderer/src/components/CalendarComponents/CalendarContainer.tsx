@@ -4,7 +4,6 @@ import { CellContainer } from './CellContainer';
 import { DaysContainer } from './DaysContainer';
 
 function CalendarContainer(){
-    console.log(new Date().getMonth());
 
     const [monthIndex, setMonthIndex] = useState<number>(new Date().getMonth());
 
