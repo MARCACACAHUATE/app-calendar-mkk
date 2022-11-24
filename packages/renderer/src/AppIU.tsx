@@ -7,6 +7,7 @@ import { HeaderExportButton } from './components/HeaderComponents/HeaderExportBu
 import { CalendarProvider } from './context/CalendarContext';
 import { ModalContext } from './context/ModalContext';
 import { ModalContainer } from './components/TareasComponents/ModalContainer';
+import { ModalTareasDetail } from './components/ModalesComponents/ModalTareasDetail';
 import { TareasDetailContainer } from './components/TareasComponents/TareasDetailContainer';
 import { CreateTareaContainer } from './components/TareasComponents/CreateTareaComponents/CreateTareaContainer';
 
@@ -32,6 +33,12 @@ function AppIU(){
                 <ModalContainer>
                         <CreateTareaContainer />
                 </ModalContainer>
+                }
+
+                { !!modalInfo?.modalTareasOpen &&
+                <ModalTareasDetail>
+                    <TareasDetailContainer />
+                </ModalTareasDetail>
                 }
             </CalendarProvider>
         </div>

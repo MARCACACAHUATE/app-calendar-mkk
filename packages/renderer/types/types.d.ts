@@ -14,8 +14,10 @@ export interface CalendarInfo {
 
 
 export interface ModalInfo {
-    isOpen: boolean,
+    isOpen: boolean
     setIsOpen: any
+    modalTareasOpen: boolean
+    setModalTareasOpen: any
 }
 
 export interface TareaPendiente {

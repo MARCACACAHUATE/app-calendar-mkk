@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ModalContext } from '../../../context/ModalContext';
 
 
 interface Props {
@@ -12,14 +13,19 @@ function limitar_caracteres(elemento: string, max_chars: number): string{
     return elemento;
 }
 
-
 function PreViewContainer(props: Props) {
+
+    const modalInfo = useContext(ModalContext);
+
+    const onClickOpenModal = () => {
+        modalInfo?.setModalTareasOpen(!modalInfo?.modalTareasOpen);
+    }
 
 
     return (
-        <div  className="bg-teal-500 rounded-lg py-[2px] px-[5px] my-[1px]">
+        <button onClick={onClickOpenModal}  className="bg-teal-500 rounded-lg py-[2px] px-[5px] my-[1px]">
             <p className="text-white text-xs">{ limitar_caracteres(props.titulo_tarea, 14) }</p>
-        </div>
+        </button>
     );
 }
 
