@@ -17,3 +17,13 @@ export interface ModalInfo {
     isOpen: boolean,
     setIsOpen: any
 }
+
+export interface TareaPendiente {
+    titulo: string
+    prioridad: string 
+    estado: string
+    fecha_inicio: string
+    fecha_vencimiento: string
+    asignado: Array<string>
+    descripcion: string
+}
