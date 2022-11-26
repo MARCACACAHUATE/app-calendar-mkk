@@ -11,7 +11,7 @@ module.exports = {
         }
     },
     fontFamily: {
-        'nerd': [''],
+        'nerd': ['CaskaydiaCove NF Mono', 'JetBrainsMono Nerd Font'],
     }
   },
   plugins: [],

@@ -24,7 +24,7 @@ function PreViewContainer(props: Props) {
 
     return (
         <button onClick={onClickOpenModal}  className="bg-teal-500 rounded-lg py-[2px] px-[5px] my-[1px]">
-            <p className="text-white text-xs">{ limitar_caracteres(props.titulo_tarea, 14) }</p>
+            <p className="text-white text-xs">{ limitar_caracteres(props.titulo_tarea, 12) }</p>
         </button>
     );
 }
