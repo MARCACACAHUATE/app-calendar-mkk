@@ -43,9 +43,9 @@ function MonthNav({setMonthIndex, monthIndex}: Props){
 
     return (
         <div className="box-border w-full h-7 bg-gray-400 flex justify-between">
-            <button  onClick={onPreviousMonthHandler}> - </button>
+            <button className="mx-1 text-xl" onClick={onPreviousMonthHandler}>  </button>
             <span>{ monthsName[monthIndex].month_name }, {monthsName[0].year}</span>
-            <button  onClick={onNextMonthHandler}> + </button>
+            <button className="mx-1 text-xl"  onClick={onNextMonthHandler}>  </button>
         </div>
     );
 }

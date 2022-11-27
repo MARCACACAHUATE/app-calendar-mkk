@@ -18,6 +18,8 @@ export interface ModalInfo {
     setIsOpen: any
     modalTareasOpen: boolean
     setModalTareasOpen: any
+    modalExportOpen: boolean
+    setModalExportOpen: any
 }
 
 export interface TareaPendiente {

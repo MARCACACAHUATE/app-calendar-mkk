@@ -8,8 +8,10 @@ import { CalendarProvider } from './context/CalendarContext';
 import { ModalContext } from './context/ModalContext';
 import { ModalContainer } from './components/TareasComponents/ModalContainer';
 import { ModalTareasDetail } from './components/ModalesComponents/ModalTareasDetail';
+import { ModalExport } from './components/ModalesComponents/ModalExport';
 import { TareasDetailContainer } from './components/TareasComponents/TareasDetailContainer';
 import { CreateTareaContainer } from './components/TareasComponents/CreateTareaComponents/CreateTareaContainer';
+import { ExportContainer } from './components/ExportComponents/ExportContainer';
 
 function AppIU(){
 
@@ -39,6 +41,12 @@ function AppIU(){
                 <ModalTareasDetail>
                     <TareasDetailContainer />
                 </ModalTareasDetail>
+                }
+
+                { !!modalInfo?.modalExportOpen &&
+                <ModalExport>
+                    <ExportContainer />
+                </ModalExport>
                 }
             </CalendarProvider>
         </div>

@@ -8,6 +8,7 @@ function ModalProvider(props: any){
     // Estado para mostrar las ventanas modales
     const [ isOpen, setIsOpen ] = useState<boolean>(false);
     const [ modalTareasOpen, setModalTareasOpen ] = useState<boolean>(false);
+    const [ modalExportOpen, setModalExportOpen ] = useState<boolean>(false);
 
 
     return (
@@ -15,7 +16,9 @@ function ModalProvider(props: any){
                 isOpen,
                 setIsOpen,
                 modalTareasOpen,
-                setModalTareasOpen
+                setModalTareasOpen,
+                modalExportOpen,
+                setModalExportOpen
             }}>
             {props.children}
         </ModalContext.Provider>
