@@ -5,9 +5,9 @@ import { TareasFiltrosContainer } from './TareasFiltrosContainer';
 
 function TareasDetailContainer(){
     return (
-            <div className="h-96 w-[40rem] bg-red-900 rounded-lg">
+            <div className="bg-white h-[38] w-[40rem] rounded-lg p-4 text-[#444444]">
                 <TareasFechaHeader />
-                <div className="flex flex-row">
+                <div className="flex flex-row w-full">
                     <TareaDetailListContainer />
                     <TareasFiltrosContainer />
                 </div>

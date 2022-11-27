@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Routes, Link } from 'react-router-dom'
 import { TareaItem } from './TareaItem';
 import { TaskDetailContainer } from './TaskDetailComponents/TaskDetailContainer';
@@ -7,9 +7,12 @@ import { TaskDetailContainer } from './TaskDetailComponents/TaskDetailContainer'
 const titulos = ["Tarea 1", "Comprar chicharones", "8 kilos de jitomate"];
 
 function TareaDetailListContainer(){
+
+    const [ mostrarLista, setMostrarLista ] = useState(true);
+
     return (
-        <div>
-            <h1>Tareas Pendientes</h1>
+        <div className="flex-none w-1/2 border-0 border-r border-[#aaaaaa]">
+            <h1 className="text-center">Tareas Pendientes</h1>
             <ul>
             {
                 titulos.map((tituloHeader, index)=>(

@@ -12,9 +12,9 @@ function TareasFechaHeader(){
 
 
     return (
-        <div className="flex flex-row justify-between px-4">
+        <div className="flex flex-row justify-between font-bold">
             <h2>Fecha: 21 de Noviembre del 2022</h2>
-            <button onClick={onClickCloseModal}>X</button>
+            <button onClick={onClickCloseModal}></button>
         </div>
     );
 }
