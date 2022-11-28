@@ -1,13 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { ModalContext } from '../../../context/ModalContext';
+import { DBContext } from '../../../context/DbContext';
 import { TareaPendiente } from '../../../../types/types';
 
 interface TareaPendienteForm extends TareaPendiente {
     persona: string
     lista_personas: string
 }
-
-const tareas:Array<TareaPendiente> = [];
 
 function TaskCreationForm(){
     const listaPrioridad = ["Bajo", "Mediano", "Alto"];
@@ -27,6 +26,7 @@ function TaskCreationForm(){
 
     // Contexto para abrir/cerrar el modal
     const modalInfo = useContext(ModalContext);
+    const dbInfo = useContext(DBContext);
 
     // Cerrar el modal
     const onCloseModal = () =>{
@@ -37,7 +37,6 @@ function TaskCreationForm(){
     const AddAsignadoNuevo = (event: any) =>{
         event.preventDefault();
         inputValues.asignado.push(inputValues.persona);
-        console.log(inputValues.asignado);
         inputValues.lista_personas += `${inputValues.persona} \n`; 
         inputValues.persona = '';
     }
@@ -45,8 +44,21 @@ function TaskCreationForm(){
     // Guarda los datos la tarea
     const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        tareas.push(inputValues)
-        console.log(tareas);
+
+        try{
+            dbInfo?.CreateTarea({
+                    estado: inputValues.estado,
+                    titulo: inputValues.titulo,
+                    prioridad: inputValues.prioridad,
+                    descripcion: inputValues.descripcion,
+                    fecha_inicio: inputValues.fecha_inicio,
+                    fecha_vencimiento: inputValues.fecha_vencimiento
+                });
+            modalInfo?.setIsOpen(false)
+
+        } catch(error){
+            console.log(error);
+        }
     }
 
     // Maneja los datos del formulario
@@ -55,7 +67,6 @@ function TaskCreationForm(){
             ...inputValues,
             [event.target.name]: event.target.value
         })
-        console.log(inputValues);
     }
 
 

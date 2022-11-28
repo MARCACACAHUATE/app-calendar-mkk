@@ -12,6 +12,8 @@ import { ModalExport } from './components/ModalesComponents/ModalExport';
 import { TareasDetailContainer } from './components/TareasComponents/TareasDetailContainer';
 import { CreateTareaContainer } from './components/TareasComponents/CreateTareaComponents/CreateTareaContainer';
 import { ExportContainer } from './components/ExportComponents/ExportContainer';
+import { DBProvider } from './context/DbContext';
+
 
 function AppIU(){
 
@@ -20,6 +22,7 @@ function AppIU(){
     return (
         <BrowserRouter>
         <div>
+            <DBProvider>
             <CalendarProvider>
                 <div className="grid grid-cols-[64px_minmax(900px,_1fr)_100px]">
                     <div className="">
@@ -49,6 +52,7 @@ function AppIU(){
                 </ModalExport>
                 }
             </CalendarProvider>
+            </DBProvider>
         </div>
         </BrowserRouter>
     );

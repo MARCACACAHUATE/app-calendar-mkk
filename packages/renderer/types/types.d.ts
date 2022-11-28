@@ -1,3 +1,5 @@
+import { Tareas, CreateTarea } from "#preload"
+
 export interface DateCalendarInfo {
     year: number
     month_name: string 
@@ -20,6 +22,12 @@ export interface ModalInfo {
     setModalTareasOpen: any
     modalExportOpen: boolean
     setModalExportOpen: any
+}
+
+export interface DBInfo {
+    tareasList: Array<Tareas>
+    setTareasList: any
+    CreateTarea: any
 }
 
 export interface TareaPendiente {
