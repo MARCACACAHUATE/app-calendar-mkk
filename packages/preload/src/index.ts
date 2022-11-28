@@ -1,7 +1,8 @@
 /**
  * @module preload
  */
+import "reflect-metadata"
 
-export {sha256sum} from './nodeCrypto';
-export {versions} from './versions';
-export {CreateCalendar} from './genDate';
+export { CreateCalendar } from './genDate';
+export { GetTareas, CreateTarea } from './services/TareasServices';
+export { Tareas } from './models/tareas';
