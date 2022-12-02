@@ -21,6 +21,7 @@ function CellContainer({monthIndex}: Props){
             {days[monthIndex].map((index)=>(
                 <div key={index} className={index === 0 ? `col-start-${calendarInfo?.calendar[monthIndex].start_on + 1}` : ``}>
                     <CellDay number_day={days[monthIndex][index] + 1}
+                             number_month={monthIndex + 1}
                             today={index + 1 == calendarInfo?.actualDay && monthIndex == calendarInfo.actualMonth}/>
                 </div>
             ))}
