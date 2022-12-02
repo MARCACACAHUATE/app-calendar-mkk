@@ -7,7 +7,6 @@ function BotonCrear(){
 
     const onClickHandler = () =>{
         modalInfo?.setIsOpen(!modalInfo?.isOpen);
-        console.log(modalInfo?.isOpen)
     };
 
     return (

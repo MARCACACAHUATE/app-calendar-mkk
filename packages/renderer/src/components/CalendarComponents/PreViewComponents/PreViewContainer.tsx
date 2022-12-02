@@ -1,31 +1,32 @@
 import React, { useContext } from "react";
+import { PreViewItem } from "./PreViewItem";
 import { ModalContext } from '../../../context/ModalContext';
 
 
-interface Props {
-    titulo_tarea: string
-}
+const titulos = ["tarea que tengo que hacer", "Pendientes de mañana", "hola", "arriba las chivas", "mañana no hay clases", "Mañana si hay clases"];
 
-function limitar_caracteres(elemento: string, max_chars: number): string{
-    if(elemento.length > max_chars){
-        return `${elemento.substring(0, max_chars)}...`;
-    }
-    return elemento;
-}
-
-function PreViewContainer(props: Props) {
+function PreViewContainer() {
 
     const modalInfo = useContext(ModalContext);
+    const preview_list = titulos.slice(0, 3);
+    const total_tareas = titulos.length;
 
     const onClickOpenModal = () => {
         modalInfo?.setModalTareasOpen(!modalInfo?.modalTareasOpen);
     }
 
-
     return (
-        <button onClick={onClickOpenModal}  className="bg-teal-500 rounded-lg py-[2px] px-[5px] my-[1px]">
-            <p className="text-white text-xs">{ limitar_caracteres(props.titulo_tarea, 12) }</p>
-        </button>
+        <div onClick={onClickOpenModal} className="flex flex-col h-full">
+
+            {preview_list.map((value, index) => (
+                <PreViewItem key={index} titulo_tarea={value} />
+            ))}
+
+            { total_tareas > 3 && (
+            <p className="text-[#232323] text-[8px] text-end">+ {total_tareas - 3} restantes</p>
+            )}
+
+        </div>
     );
 }
 
