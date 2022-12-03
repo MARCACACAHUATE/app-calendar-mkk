@@ -6,6 +6,8 @@ const CalendarContext = createContext<CalendarInfo | null>(null);
 
 function CalendarProvider(props: any){
 
+    // Estado del dia seleccionado en el calendario
+    const [dateSelected, setDateSelected] = useState<string>('string');
 
     // Genera la info para renderizar el calendario principal
     const {calendar, week_days_name} = CreateCalendar(2022, 'es');
@@ -20,7 +22,9 @@ function CalendarProvider(props: any){
                 calendar,
                 week_days_name,
                 actualDay,
-                actualMonth
+                actualMonth,
+                dateSelected,
+                setDateSelected
             }}>
             {props.children}
         </CalendarContext.Provider>

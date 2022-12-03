@@ -1,12 +1,20 @@
 import React, { useContext } from "react";
 import { ModalContext } from '../../context/ModalContext';
+import { CalendarContext } from '../../context/CalendarContext';
 
-function BotonCrear(){
+
+interface Props {
+    fecha_celda: string 
+}
+
+function BotonCrear(props: Props){
 
     const modalInfo = useContext(ModalContext);
+    const calendarInfo = useContext(CalendarContext);
 
     const onClickHandler = () =>{
         modalInfo?.setIsOpen(!modalInfo?.isOpen);
+        calendarInfo?.setDateSelected(props.fecha_celda);
     };
 
     return (

@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { ModalContext } from '../../../context/ModalContext';
 import { DBContext } from '../../../context/DbContext';
+import { CalendarContext } from '../../../context/CalendarContext';
 import { TareaPendiente } from '../../../../types/types';
 
 interface TareaPendienteForm extends TareaPendiente {
@@ -12,21 +13,25 @@ function TaskCreationForm(){
     const listaPrioridad = ["Bajo", "Mediano", "Alto"];
     const listaEstado = ["No Iniciado", "En Proceso", "Terminado"];
 
+    // Contexto para abrir/cerrar el modal
+    const modalInfo = useContext(ModalContext);
+    const dbInfo = useContext(DBContext);
+    const calendarInfo = useContext(CalendarContext);
+
     const [ inputValues, setInputValues ] = useState<TareaPendienteForm>({
         titulo: '',
         prioridad: listaPrioridad[0].toLowerCase(),
         estado: listaEstado[0].toLowerCase(),
-        fecha_inicio: '',
-        fecha_vencimiento: '',
+        fecha_inicio: new Date().toISOString().slice(0, -8),
+        fecha_vencimiento: calendarInfo?.dateSelected || '',
         asignado: [],
         descripcion: '',
         persona: '',
         lista_personas: ''
     });
 
-    // Contexto para abrir/cerrar el modal
-    const modalInfo = useContext(ModalContext);
-    const dbInfo = useContext(DBContext);
+    console.log(calendarInfo?.dateSelected.toString())
+    console.log(new Date().toISOString());
 
     // Cerrar el modal
     const onCloseModal = () =>{
@@ -88,10 +93,10 @@ function TaskCreationForm(){
             </select>
 
             <label className="order-5">Fecha de Inicio</label>
-            <input value={inputValues.fecha_inicio} name="fecha_inicio" onChange={handleChange} className="w-32 order-7 bg-white border-2 border-[#d6d6d6] rounded-md text-[#7a7a7a]" type="datetime-local"/>
+            <input value={inputValues.fecha_inicio} name="fecha_inicio" onChange={handleChange} className="w-32 order-7 bg-white border-2 border-[#d6d6d6] rounded-md text-[#7a7a7a] text-xs" type="datetime-local"/>
 
             <label className="order-6">Fecha de Vencimiento</label>
-            <input value={inputValues.fecha_vencimiento} name="fecha_vencimiento" onChange={handleChange} className="w-32 order-8 bg-white border-2 border-[#d6d6d6] rounded-md text-[#7a7a7a]" type="datetime-local"/>
+            <input value={inputValues.fecha_vencimiento} name="fecha_vencimiento" onChange={handleChange} className="w-32 order-8 bg-white border-2 border-[#d6d6d6] rounded-md text-[#7a7a7a] text-xs" type="datetime-local"/>
 
             <div className="flex flex-row justify-between order-9 col-span-2">
                 <label>Titulo: </label>

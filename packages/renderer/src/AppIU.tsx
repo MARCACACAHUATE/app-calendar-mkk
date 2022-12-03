@@ -36,7 +36,7 @@ function AppIU(){
                 </div>
                 { !!modalInfo?.isOpen &&
                 <ModalContainer>
-                        <CreateTareaContainer />
+                    <CreateTareaContainer />
                 </ModalContainer>
                 }
 
