@@ -1,3 +1,4 @@
+import { Like } from 'typeorm'
 import { AppDataSource } from '../dataSource';
 import { Tareas } from '../models/tareas';
 
@@ -16,6 +17,15 @@ export async function GetTareas() {
     const tareasRepository = AppDataSource.getRepository(Tareas);
     const tareas_list = await tareasRepository.find();
     return tareas_list
+}
+
+export async function GetTareasFilter(fecha_vencimiento: string){
+    console.log(fecha_vencimiento)
+    const tareasRepository = AppDataSource.getRepository(Tareas);
+    const tareas_filter = await tareasRepository.findBy({
+        fecha_vencimiento: Like(`${fecha_vencimiento}%`),
+    });
+    return tareas_filter;
 }
 
 export function CreateTarea(data: TareasData) {
