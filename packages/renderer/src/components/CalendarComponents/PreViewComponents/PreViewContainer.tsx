@@ -1,23 +1,26 @@
 import React, { useContext } from "react";
 import { PreViewItem } from "./PreViewItem";
 import { ModalContext } from '../../../context/ModalContext';
+import { CalendarContext } from '../../../context/CalendarContext'
 import { Tareas } from "#preload";
 
 
-const titulos = ["tarea que tengo que hacer", "Pendientes de mañana", "hola", "arriba las chivas", "mañana no hay clases", "Mañana si hay clases"];
-
 interface Props {
     lista_tareas?: Array<Tareas>
+    fecha_celda: string
 }
 
 function PreViewContainer(props: Props) {
 
     const modalInfo = useContext(ModalContext);
+    const calendarInfo = useContext(CalendarContext);
+
     const preview_list = props.lista_tareas?.slice(0, 3);
     const total_tareas = props.lista_tareas != undefined ? props.lista_tareas?.length : 0;
 
     const onClickOpenModal = () => {
         modalInfo?.setModalTareasOpen(!modalInfo?.modalTareasOpen);
+        calendarInfo?.setDateSelected(props.fecha_celda);
     }
 
     return (

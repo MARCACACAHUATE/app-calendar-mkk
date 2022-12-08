@@ -31,7 +31,8 @@ function CellDay(props: Props) {
     return (
         <div className="box-border h-36 w-32 p-1 rounded-md flex flex-col justify-between border-2 border-gray-200" >
             <BotonCrear fecha_celda={fecha_celda}/>
-            <PreViewContainer lista_tareas={tareas_list != undefined ? tareas_list : []}/>
+            <PreViewContainer lista_tareas={tareas_list != undefined ? tareas_list : []}
+                              fecha_celda={fecha_celda}/>
             <h3 className={props.today ? today_mark : "text-center"}>{props.number_day}</h3>
         </div>
     );

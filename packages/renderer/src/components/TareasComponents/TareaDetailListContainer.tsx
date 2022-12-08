@@ -4,14 +4,17 @@ import { GetTareasFilter, Tareas } from '#preload';
 import { TareaItem } from './TareaItem';
 import { TaskDetailContainer } from './TaskDetailComponents/TaskDetailContainer';
 
+interface Props {
+    fecha: string
+}
 
-
-function TareaDetailListContainer(){
+function TareaDetailListContainer(props: Props){
 
     const [tareasList, setTareasList] = useState<Array<Tareas>>([])
+    console.log(props.fecha.slice(0, 10));
     
     useEffect(()=>{
-        GetTareasFilter('2022-12-23').then(value=> setTareasList(value));
+        GetTareasFilter(props.fecha.slice(0, 10)).then(value=> setTareasList(value));
     }, [])
 
     return (
