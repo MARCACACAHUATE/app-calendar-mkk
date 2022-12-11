@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from 'react-router-dom';
 import { ModalContext } from '../../context/ModalContext';
 import { DateCalendarInfo } from '../../../types/types';
 
@@ -21,8 +22,11 @@ function TareasFechaHeader(props: Props){
 
     return (
         <div className="flex flex-row justify-between font-bold">
-            <h2>Fecha: {`${numero_dia} de ${mes.month_name} del ${fecha[0]}`}</h2>
-            <button onClick={onClickCloseModal}></button>
+            <div className="flex flex-row">
+                <Link to="/"><p className="text-xl mx-2"></p></Link>
+                <h2>Fecha: {`${numero_dia} de ${mes.month_name} del ${fecha[0]}`}</h2>
+            </div>
+            <Link to="/"><button onClick={onClickCloseModal}></button></Link>
         </div>
     );
 }

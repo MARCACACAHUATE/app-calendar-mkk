@@ -12,11 +12,11 @@ function TareasDetailContainer(){
     console.log(calendarInfo?.dateSelected);
     
     return (
-            <div className="bg-white h-[38] w-[40rem] rounded-lg p-4 text-[#444444]">
+            <div className="bg-white w-[40rem] rounded-lg p-4 text-[#444444]">
                 <TareasFechaHeader fecha={calendarInfo?.dateSelected ||  ''}
                                    meses_list={calendarInfo?.calendar}/>
                 <div className="flex flex-row w-full">
-                    <TareaDetailListContainer fecha={calendarInfo?.dateSelected || ''}/>
+                    <TareaDetailListContainer fecha_cell={calendarInfo?.dateSelected || ''}/>
                     <TareasFiltrosContainer />
                 </div>
             </div>
