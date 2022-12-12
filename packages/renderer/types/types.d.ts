@@ -30,6 +30,8 @@ export interface DBInfo {
     tareasList: Array<Tareas>
     setTareasList: any
     CreateTarea: any
+    filtro: string
+    setFiltros: any
 }
 
 export interface TareaPendiente {

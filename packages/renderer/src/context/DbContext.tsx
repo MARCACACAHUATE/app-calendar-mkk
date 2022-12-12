@@ -7,6 +7,7 @@ const DBContext = createContext<DBInfo | null>(null);
 function DBProvider(props: any){
 
     const [tareasList, setTareasList ]= useState<Array<Tareas>>([]);
+    const [filtro, setFiltros] = useState<string>('todos');
 
     useEffect(()=>{ 
         GetTareas().then((value)=>{ setTareasList(value)})
@@ -16,7 +17,9 @@ function DBProvider(props: any){
         <DBContext.Provider value={{
                 tareasList,
                 setTareasList,
-                CreateTarea
+                CreateTarea,
+                filtro, 
+                setFiltros
             }}>
             {props.children}
         </DBContext.Provider>
