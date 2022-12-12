@@ -19,8 +19,7 @@ function TareaDetailListContainer(props: Props){
     }, [])
 
     return (
-        <div className="flex-none w-1/2 border-0 border-r border-[#aaaaaa]">
-            <h1 className="text-center">Tareas Pendientes</h1>
+        <div className="flex flex-col w-full">
 
             <Routes>
                 <Route path="/" element={ <TareasDetailList tareas_list={tareasList} /> } />
