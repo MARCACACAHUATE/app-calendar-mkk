@@ -23,8 +23,8 @@ function TaskDetailContainer({tarea_data}: Props){
 
 
     return (
-        <div className="flex flex-col text-sm">
-            <div>
+        <div className="flex flex-row text-sm">
+            <div className="w-1/2">
                 <h1 className="text-xl">{ data.titulo }</h1>
                 <p><span className="font-bold">Fecha de Inicio:</span> { data.fecha_inicio.slice(0, 10) }</p>
                 <p><span className="font-bold">Fecha de Vencimiento:</span> { data.fecha_vencimiento.slice(0, 10) }</p>
@@ -33,7 +33,7 @@ function TaskDetailContainer({tarea_data}: Props){
                 <p><span className="font-bold">Nivel de Prioridad:</span> { data.prioridad }</p>
                 <p><span className="font-bold">Estado de la Tarea:</span> { data.estado }</p>
             </div>
-            <textarea defaultValue="arriba las pinches chivas del guadalajara" />
+            <textarea className="w-1/2 order-[13] col-span-2 bg-white border-2 border-[#d6d6d6] rounded-md text-[#7a7a7a]" defaultValue={ data.descripcion } />
         </div>
     );
 }
