@@ -1,8 +1,9 @@
 import { Like } from 'typeorm'
 import { AppDataSource } from '../dataSource';
 import { Tareas } from '../models/tareas';
+import { Personas } from "../models/personas";
+import { Create_or_get_persona } from "../services/PersonasServices";
 
-AppDataSource.initialize();
 
 interface TareasData {
     estado: string
@@ -11,6 +12,7 @@ interface TareasData {
     descripcion: string
     fecha_inicio: string
     fecha_vencimiento: string
+    asignados: Array<string>
 }
 
 export async function GetTareas() {
@@ -20,7 +22,6 @@ export async function GetTareas() {
 }
 
 export async function GetTareasFilter(fecha_vencimiento: string){
-    console.log(fecha_vencimiento)
     const tareasRepository = AppDataSource.getRepository(Tareas);
     const tareas_filter = await tareasRepository.findBy({
         fecha_vencimiento: Like(`${fecha_vencimiento}%`),
@@ -28,7 +29,18 @@ export async function GetTareasFilter(fecha_vencimiento: string){
     return tareas_filter;
 }
 
-export function CreateTarea(data: TareasData) {
+export async function CreateTarea(data: TareasData) {
+    const tareasRepository = AppDataSource.getRepository(Tareas);
+
+    // Traemos o creamos a las personas asignadas en la DB
+    const lista_personas: Personas[] = []
+
+    for(let i = 0; i < data.asignados.length; i++){
+        let persona = await Create_or_get_persona(data.asignados[i])
+        lista_personas.push(persona)
+    }
+    
+    // creamos la tarea con la relacion a las personas asignadas
     const tarea = new Tareas();
     tarea.estado = data.estado;
     tarea.titulo = data.titulo;
@@ -36,7 +48,9 @@ export function CreateTarea(data: TareasData) {
     tarea.descripcion = data.descripcion;
     tarea.fecha_inicio = data.fecha_inicio;
     tarea.fecha_vencimiento = data.fecha_vencimiento;
-    tarea.save();
+    tarea.personas = lista_personas;
+
+    await tareasRepository.save(tarea);
 
     return tarea;
 }

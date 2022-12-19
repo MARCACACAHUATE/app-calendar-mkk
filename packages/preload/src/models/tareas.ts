@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, ManyToMany, JoinTable } from 'typeorm';
+import { Personas } from "./personas";
 
 @Entity("tareas")
 export class Tareas extends BaseEntity {
@@ -22,4 +23,8 @@ export class Tareas extends BaseEntity {
 
     @Column("text")
     descripcion: string 
+
+    @ManyToMany(() => Personas)
+    @JoinTable()
+    personas: Personas[]
 }
