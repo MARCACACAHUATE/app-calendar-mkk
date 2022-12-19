@@ -17,15 +17,25 @@ interface TareasData {
 
 export async function GetTareas() {
     const tareasRepository = AppDataSource.getRepository(Tareas);
-    const tareas_list = await tareasRepository.find();
+    const tareas_list = await tareasRepository.find({
+        relations:{
+            personas: true
+        }
+    });
     return tareas_list
 }
 
 export async function GetTareasFilter(fecha_vencimiento: string){
     const tareasRepository = AppDataSource.getRepository(Tareas);
-    const tareas_filter = await tareasRepository.findBy({
+    const tareas_filter = await tareasRepository.find({
+        relations: {
+            personas: true
+        },
+        where:{
         fecha_vencimiento: Like(`${fecha_vencimiento}%`),
+        }
     });
+
     return tareas_filter;
 }
 
