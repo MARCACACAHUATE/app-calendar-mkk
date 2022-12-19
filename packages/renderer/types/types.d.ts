@@ -1,4 +1,4 @@
-import { Tareas, CreateTarea } from "#preload"
+import { Tareas, Personas  } from "#preload"
 
 export interface DateCalendarInfo {
     year: number

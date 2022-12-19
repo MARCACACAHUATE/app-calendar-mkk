@@ -3,6 +3,7 @@ import { ModalContext } from '../../../context/ModalContext';
 import { DBContext } from '../../../context/DbContext';
 import { CalendarContext } from '../../../context/CalendarContext';
 import { TareaPendiente } from '../../../../types/types';
+import { CreatePersona, Personas } from "#preload";
 
 interface TareaPendienteForm extends TareaPendiente {
     persona: string
@@ -18,6 +19,7 @@ function TaskCreationForm(){
     const dbInfo = useContext(DBContext);
     const calendarInfo = useContext(CalendarContext);
 
+    const [ asignadoList, setAsignadoList ] = useState("");
     const [ inputValues, setInputValues ] = useState<TareaPendienteForm>({
         titulo: '',
         prioridad: listaPrioridad[0].toLowerCase(),
@@ -30,9 +32,6 @@ function TaskCreationForm(){
         lista_personas: ''
     });
 
-    console.log(calendarInfo?.dateSelected.toString())
-    console.log(new Date().toISOString());
-
     // Cerrar el modal
     const onCloseModal = () =>{
         modalInfo?.setIsOpen(false);
@@ -41,8 +40,11 @@ function TaskCreationForm(){
     // Agregando personas a la lista de asignados
     const AddAsignadoNuevo = (event: any) =>{
         event.preventDefault();
-        inputValues.asignado.push(inputValues.persona);
+
+        inputValues.asignado.push(inputValues.persona) 
         inputValues.lista_personas += `${inputValues.persona} \n`; 
+
+        setAsignadoList(asignadoList + `${inputValues.persona} \n`)
         inputValues.persona = '';
     }
 
@@ -51,14 +53,18 @@ function TaskCreationForm(){
         event.preventDefault();
 
         try{
+
+            // Crea la tarea
             dbInfo?.CreateTarea({
                     estado: inputValues.estado,
                     titulo: inputValues.titulo,
                     prioridad: inputValues.prioridad,
                     descripcion: inputValues.descripcion,
                     fecha_inicio: inputValues.fecha_inicio,
-                    fecha_vencimiento: inputValues.fecha_vencimiento
+                    fecha_vencimiento: inputValues.fecha_vencimiento,
+                    asignados: inputValues.asignado
                 });
+
             modalInfo?.setIsOpen(false)
 
         } catch(error){
@@ -107,9 +113,9 @@ function TaskCreationForm(){
             <div className="flex flex-row justify-between order-10 col-span-2">
                 <label className="">Asignado a</label>
                 <input name="persona" value={inputValues.persona} onChange={handleChange} className="w-48 bg-white border-2 border-[#d6d6d6] rounded-md text-[#7a7a7a]" type="text" />
-                <input className="bg-[#444444] rounded-lg pl-1 pr-1 text-white text-sm" type="submit" value="Add" onClick={AddAsignadoNuevo} />
+                <input className="bg-[#444444] rounded-lg pl-1 pr-1 text-white text-sm" type="submit" value="Add" onClick={AddAsignadoNuevo} disabled={inputValues.persona.length == 0 ? true : false}/>
             </div>
-            <textarea value={inputValues.lista_personas} name="lista_personas" readOnly={true} className="mt-3 order-11 col-span-2 bg-white border-2 border-[#d6d6d6] rounded-md text-[#7a7a7a]"/>
+            <textarea value={asignadoList} name="lista_personas" readOnly={true} className="mt-3 order-11 col-span-2 bg-white border-2 border-[#d6d6d6] rounded-md text-[#7a7a7a]"/>
 
             <label  className="order-12 col-span-2">Descripcion de la tarea</label>
             <textarea name="descripcion" value={inputValues.descripcion} onChange={handleChange} className="order-[13] col-span-2 bg-white border-2 border-[#d6d6d6] rounded-md text-[#7a7a7a]"/>
