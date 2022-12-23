@@ -5,7 +5,11 @@ import "reflect-metadata"
 
 // Services
 export { CreateCalendar } from './genDate';
-export { GetTareas, CreateTarea, GetTareasFilter } from './services/TareasServices';
+export { GetTareas,
+         CreateTarea, 
+         GetTareasFilter,
+         ModificarDescripcion 
+} from './services/TareasServices';
 export { CreatePersona } from "./services/PersonasServices";
 
 // Models

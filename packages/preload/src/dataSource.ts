@@ -6,7 +6,8 @@ const AppDataSource = new DataSource({
     type: 'sqlite',
     database: "calendarDB.db",
     logging: true,
-    entities: [Tareas, Personas],
+    //entities: [Tareas, Personas],
+    entities: ["src/models/*.ts", Tareas, Personas],
     migrations: ["src/**/migration/*.ts"]
 });
 

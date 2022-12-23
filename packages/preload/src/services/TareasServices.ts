@@ -1,4 +1,6 @@
-import { Like } from 'typeorm'
+import "reflect-metadata";
+import * as sqlite from "sqlite3"
+import { Like } from 'typeorm';
 import { AppDataSource } from '../dataSource';
 import { Tareas } from '../models/tareas';
 import { Personas } from "../models/personas";
@@ -14,6 +16,7 @@ interface TareasData {
     fecha_vencimiento: string
     asignados: Array<string>
 }
+
 
 export async function GetTareas() {
     const tareasRepository = AppDataSource.getRepository(Tareas);
@@ -63,4 +66,20 @@ export async function CreateTarea(data: TareasData) {
     await tareasRepository.save(tarea);
 
     return tarea;
+}
+
+
+export async function ModificarDescripcion(tarea: Tareas, new_descripcion: string) {
+    sqlite.verbose()
+
+    // creamos la conexion a la db
+    const db_name = "/home/marca/Dev/app-calendar-mkk/calendarDB.db";
+    const db = new sqlite.Database(db_name, (error) => { 
+        if(error) return console.error(error?.message)
+    }); 
+
+    // hacemos la query
+    db.run("UPDATE tareas SET descripcion = ? WHERE Id = ?", [new_descripcion, tarea.Id], (error) => {
+        if (error) return console.error(error?.message);
+    });
 }
