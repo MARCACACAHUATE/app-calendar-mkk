@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
-import { useParams, Link } from 'react-router-dom';
-import { ModalContext } from '../../../context/ModalContext';
-import { Tareas } from '#preload';
+import { useParams } from 'react-router-dom';
+import { DBContext } from '../../../context/DbContext';
+import { Tareas, ModificarDescripcion } from '#preload';
 
 
 interface Props {
@@ -9,13 +9,14 @@ interface Props {
 }
 
 function TaskDetailContainer({tarea_data}: Props){
-    const modalInfo = useContext(ModalContext);
+    const dbInfo = useContext(DBContext);
     const [dropList, setDropList] = useState<boolean>(false);
 
     // obtenemos el index de la tarea para extraerla del array
     const { index } = useParams();
     const numero_tarea = index != undefined ? parseInt(index) : 0
-    const data = tarea_data[numero_tarea]
+    let data = tarea_data[numero_tarea]
+    const [description, setDescription] = useState<string>(data.descripcion);
 
     // calcular los dias restantes
     const dia_actual = new Date().getDate();
@@ -26,6 +27,19 @@ function TaskDetailContainer({tarea_data}: Props){
     const lista_personas = dropList ? data.personas : data.personas.slice(0, 4);
     const onDropListChange = () => {
         setDropList(!dropList);
+    }
+
+    // agreagmos el titulo de la tarea al contexto
+    //dbInfo?.setTituloTarea(data.titulo);
+    //
+
+    const onClickModifyDescription = async () => {
+        await ModificarDescripcion(data, description);
+
+    }
+
+    const textareaHandleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setDescription(event.target.value);
     }
 
     return (
@@ -55,7 +69,12 @@ function TaskDetailContainer({tarea_data}: Props){
                 <p><span className="font-bold">Nivel de Prioridad:</span> { data.prioridad }</p>
                 <p><span className="font-bold">Estado de la Tarea:</span> { data.estado }</p>
             </div>
-            <textarea className="w-1/2 order-[13] col-span-2 bg-white border-2 border-[#d6d6d6] rounded-md text-[#7a7a7a]" defaultValue={ data.descripcion } />
+            <div className="flex flex-col justify-center  order-[13] col-span-2 w-1/2">
+                <textarea className="w-full h-5/6 bg-white border-2 border-[#d6d6d6] rounded-md text-[#7a7a7a]" defaultValue={ data.descripcion } onChange={textareaHandleChange}/>
+                { data.descripcion != description &&
+                    <button className="order-[14] bg-[#444444] w-36 h-8 rounded-md text-white" onClick={onClickModifyDescription}>Modificar</button>
+                }
+            </div>
         </div>
     );
 }

@@ -32,6 +32,8 @@ export interface DBInfo {
     CreateTarea: any
     filtro: string
     setFiltros: any
+    tituloTarea: string
+    setTituloTarea: any
 }
 
 export interface TareaPendiente {

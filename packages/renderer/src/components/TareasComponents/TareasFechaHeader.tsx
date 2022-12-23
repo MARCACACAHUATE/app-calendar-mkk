@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from 'react-router-dom';
 import { ModalContext } from '../../context/ModalContext';
+import { DBContext } from "../../context/DbContext";
 import { DateCalendarInfo } from '../../../types/types';
 
 interface Props {
@@ -11,9 +12,11 @@ interface Props {
 function TareasFechaHeader(props: Props){
 
     const modalInfo = useContext(ModalContext);
+    const dbInfo = useContext(DBContext);
 
     const onClickCloseModal = () => {
         modalInfo?.setModalTareasOpen(false);
+        dbInfo?.setTituloTarea("");
     }
 
     const fecha = props.fecha.split("-");

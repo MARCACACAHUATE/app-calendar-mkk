@@ -8,6 +8,7 @@ function DBProvider(props: any){
 
     const [tareasList, setTareasList ]= useState<Array<Tareas>>([]);
     const [filtro, setFiltros] = useState<string>('todos');
+    const [tituloTarea, setTituloTarea] = useState<string>("")
 
     useEffect(()=>{ 
         GetTareas().then((value)=>{ setTareasList(value)})
@@ -19,7 +20,9 @@ function DBProvider(props: any){
                 setTareasList,
                 CreateTarea,
                 filtro, 
-                setFiltros
+                setFiltros,
+                tituloTarea,
+                setTituloTarea
             }}>
             {props.children}
         </DBContext.Provider>
