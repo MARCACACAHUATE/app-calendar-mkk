@@ -8,7 +8,8 @@ export { CreateCalendar } from './genDate';
 export { GetTareas,
          CreateTarea, 
          GetTareasFilter,
-         ModificarDescripcion 
+         ModificarDescripcion,
+         ModificarEstado
 } from './services/TareasServices';
 export { CreatePersona } from "./services/PersonasServices";
 

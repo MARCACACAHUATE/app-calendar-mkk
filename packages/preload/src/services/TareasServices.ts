@@ -17,6 +17,12 @@ interface TareasData {
     asignados: Array<string>
 }
 
+// creamos la conexion a la db
+sqlite.verbose()
+const db_name = "/home/marca/Dev/app-calendar-mkk/calendarDB.db";
+const db = new sqlite.Database(db_name, (error) => { 
+    if(error) return console.error(error?.message)
+}); 
 
 export async function GetTareas() {
     const tareasRepository = AppDataSource.getRepository(Tareas);
@@ -70,16 +76,16 @@ export async function CreateTarea(data: TareasData) {
 
 
 export async function ModificarDescripcion(tarea: Tareas, new_descripcion: string) {
-    sqlite.verbose()
-
-    // creamos la conexion a la db
-    const db_name = "/home/marca/Dev/app-calendar-mkk/calendarDB.db";
-    const db = new sqlite.Database(db_name, (error) => { 
-        if(error) return console.error(error?.message)
-    }); 
-
     // hacemos la query
     db.run("UPDATE tareas SET descripcion = ? WHERE Id = ?", [new_descripcion, tarea.Id], (error) => {
+        if (error) return console.error(error?.message);
+    });
+}
+
+
+export async function ModificarEstado(tarea: Tareas, estado: string) {
+    // Query para modificar el estado
+    db.run("UPDATE tareas SET estado = ? WHERE Id = ?", [estado, tarea.Id], (error) => {
         if (error) return console.error(error?.message);
     });
 }
