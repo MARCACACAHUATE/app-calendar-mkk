@@ -22,12 +22,20 @@ function PreViewContainer(props: Props) {
         modalInfo?.setModalTareasOpen(!modalInfo?.modalTareasOpen);
         calendarInfo?.setDateSelected(props.fecha_celda);
     }
+    
+    // calcular los dias restantes de cada tarea
+    const diasRestantes = (fecha_vencimiento: string) => {
+        const dia_actual = new Date().getDate();
+        const dia_vencimiento = new Date(fecha_vencimiento).getDate();
+        const dias_restantes = dia_vencimiento - dia_actual;
+        return dias_restantes;
+    }
 
     return (
         <div onClick={onClickOpenModal} className="flex flex-col h-full">
 
             {preview_list?.map((value, index) => (
-                <PreViewItem key={index} titulo_tarea={value.titulo} />
+                <PreViewItem key={index} titulo_tarea={value.titulo} dias_restantes={diasRestantes(value.fecha_vencimiento)}/>
             ))}
 
             { total_tareas > 3 && (

@@ -45,3 +45,9 @@ export interface TareaPendiente {
     asignado: Array<string>
     descripcion: string
 }
+
+export interface Colores {
+    con_tiempo: string
+    algo_tiempo: string
+    sin_tiempo: string
+}
