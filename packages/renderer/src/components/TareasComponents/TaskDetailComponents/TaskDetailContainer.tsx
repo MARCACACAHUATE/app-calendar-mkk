@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useParams } from 'react-router-dom';
 import { DBContext } from '../../../context/DbContext';
-import { Tareas, ModificarDescripcion } from '#preload';
+import { Tareas, ModificarDescripcion, ModificarEstado } from '#preload';
 
 
 interface Props {
@@ -11,6 +11,8 @@ interface Props {
 function TaskDetailContainer({tarea_data}: Props){
     const dbInfo = useContext(DBContext);
     const [dropList, setDropList] = useState<boolean>(false);
+
+    const listaEstado = ["No Iniciado", "En Proceso", "Terminado"];
 
     // obtenemos el index de la tarea para extraerla del array
     const { index } = useParams();
@@ -42,6 +44,10 @@ function TaskDetailContainer({tarea_data}: Props){
         setDescription(event.target.value);
     }
 
+    const estadoHandleChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
+        await ModificarEstado(data, event.target.value);
+    }
+
     return (
         <div className="flex flex-row text-sm">
             <div className="w-1/2">
@@ -67,7 +73,12 @@ function TaskDetailContainer({tarea_data}: Props){
                 </button>
                 <p><span className="font-bold">Dias Restantes:</span> { dias_restantes } dias</p>
                 <p><span className="font-bold">Nivel de Prioridad:</span> { data.prioridad }</p>
-                <p><span className="font-bold">Estado de la Tarea:</span> { data.estado }</p>
+                <p><span className="font-bold">Estado de la Tarea:</span>
+                <select onChange={estadoHandleChange} name="estado" className="w-32 order-4 bg-white border-2 border-[#d6d6d6] rounded-md text-[#7a7a7a]" defaultValue={data.estado}>
+                    { listaEstado.map((value, index) => (
+                        <option key={index} value={value.toLowerCase()} >{value}</option>
+                    ))}
+                </select></p>
             </div>
             <div className="flex flex-col justify-center  order-[13] col-span-2 w-1/2">
                 <textarea className="w-full h-5/6 bg-white border-2 border-[#d6d6d6] rounded-md text-[#7a7a7a]" defaultValue={ data.descripcion } onChange={textareaHandleChange}/>
