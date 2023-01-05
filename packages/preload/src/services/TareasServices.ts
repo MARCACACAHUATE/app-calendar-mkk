@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import * as sqlite from "sqlite3"
-import { Like } from 'typeorm';
+import { Like, Between } from 'typeorm';
 import { AppDataSource } from '../dataSource';
 import { Tareas } from '../models/tareas';
 import { Personas } from "../models/personas";
@@ -46,6 +46,17 @@ export async function GetTareasFilter(fecha_vencimiento: string){
     });
 
     return tareas_filter;
+}
+
+export async function GetTareasDateRange(fecha_inicial: string, fecha_final: string){
+    const tareasRepository = AppDataSource.getRepository(Tareas);
+    const tareas_daterange = await tareasRepository.find({
+        where: {
+            fecha_vencimiento: Between(fecha_inicial, fecha_final)
+        }
+    });
+
+    return tareas_daterange;
 }
 
 export async function CreateTarea(data: TareasData) {
