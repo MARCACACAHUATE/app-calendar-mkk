@@ -1,4 +1,4 @@
-import {app, BrowserWindow} from 'electron';
+import {app, BrowserWindow, ipcMain, dialog} from 'electron';
 import {join} from 'path';
 import {URL} from 'url';
 
@@ -43,6 +43,17 @@ async function createWindow() {
       : new URL('../renderer/dist/index.html', 'file://' + __dirname).toString();
 
   await browserWindow.loadURL(pageUrl);
+
+  ipcMain.handle('dialog:openDirectory', async () => {
+      const { canceled, filePaths } = await dialog.showOpenDialog(browserWindow, {
+          properties: ['openDirectory']
+      });
+      if (canceled){
+          return
+      }else{
+          return filePaths[0]
+      }
+  })
 
   return browserWindow;
 }
